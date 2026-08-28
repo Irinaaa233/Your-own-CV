@@ -1,0 +1,409 @@
+/* ============= A4 Paper Layout ============= */
+
+.a4-wrapper {
+  flex: 1;
+  overflow: auto;
+  background: #e5e7eb;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.a4-wrapper::-webkit-scrollbar {
+  width: 10px;
+}
+
+.a4-wrapper::-webkit-scrollbar-track {
+  background: #e8eaf0;
+}
+
+.a4-wrapper::-webkit-scrollbar-thumb {
+  background: rgba(44, 62, 80, 0.3);
+  border-radius: 5px;
+}
+
+.a4-wrapper::-webkit-scrollbar-thumb:hover {
+  background: rgba(44, 62, 80, 0.5);
+}
+
+.resume-page {
+  width: 210mm;
+  height: 297mm;
+  flex-shrink: 0;
+  /* Padding controlled by CSS variables (mm units) */
+  padding: var(--rm-margin-y, 22mm) var(--rm-margin-x, 20mm);
+  box-sizing: border-box;
+  margin: 0 auto;
+  background: #ffffff;
+  box-shadow:
+    0 1px 2px rgba(44, 62, 80, 0.08),
+    0 10px 30px rgba(44, 62, 80, 0.12),
+    0 30px 80px rgba(44, 62, 80, 0.08);
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+  animation: paperRise 0.5s ease-out;
+}
+
+@keyframes paperRise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+    box-shadow: 0 1px 2px rgba(44, 62, 80, 0.05);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    box-shadow:
+      0 1px 2px rgba(44, 62, 80, 0.08),
+      0 10px 30px rgba(44, 62, 80, 0.12),
+      0 30px 80px rgba(44, 62, 80, 0.08);
+  }
+}
+
+/* Resume preview container — all styling controlled via CSS variables */
+.resume-preview {
+  width: 100%;
+  height: 100%;
+  font-family: var(--rm-font-zh, "PingFang SC"), var(--rm-font-en, "Helvetica Neue"),
+    Helvetica, Arial, sans-serif;
+  font-size: var(--rm-font-size, 14px);
+  color: var(--rm-text-color, #374151);
+  line-height: var(--rm-line-height, 1.7);
+  --rm-list-indent: 1.5em;
+}
+
+.resume-preview.fade-transition {
+  animation: contentFade 0.2s ease-out;
+}
+
+@keyframes contentFade {
+  from { opacity: 0.6; }
+  to   { opacity: 1; }
+}
+
+/* ============= Photo Frame (stacked layout only, right side – vertically aligned with Name + Contact Info) ============= */
+.photo-frame {
+  position: absolute;
+  /* Top: align with the first line of content area — the name (h1) sits right below the page padding.
+     We shift by ~2px to optically align baselines between name and top of photo. */
+  top: calc(var(--rm-margin-y, 22mm) + 2px);
+  right: var(--rm-margin-x, 20mm);
+  /* Standard 1-inch ID photo (25x35mm) ratio; expanded slightly for visibility = 30x42mm.
+     The height is roughly equal to "h1 name line + 4 stacked contact lines (≈42mm)",
+     so the frame visually aligns top-to-bottom with the contact info area on the left. */
+  width: 30mm;
+  height: 42mm;
+  min-width: 90px;
+  min-height: 126px;
+  /* Grey dashed border */
+  border: 1.5px dashed #9ca3af;
+  background: #fafafa;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  user-select: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  border-radius: 3px;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    border-color 0.15s ease,
+    background 0.15s ease;
+}
+
+.photo-frame:hover {
+  border-color: #6b7280;
+  background: #f3f4f6;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(107, 114, 128, 0.18);
+}
+
+.photo-frame .photo-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+/* Hover overlay — only visible in preview (screen-only), not on print */
+.photo-frame .photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 23, 42, 0.55) 0%,
+    rgba(15, 23, 42, 0.7) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.photo-frame .photo-overlay svg {
+  flex-shrink: 0;
+}
+
+.photo-remove-btn {
+  position: absolute !important;
+  top: 5px;
+  right: 5px;
+  width: 22px !important;
+  height: 22px !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  background: rgba(75, 85, 99, 0.92) !important;
+  color: #ffffff !important;
+  border: none !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  line-height: 1 !important;
+}
+
+.photo-remove-btn:hover {
+  background: #374151 !important;
+  transform: scale(1.06);
+}
+
+.photo-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px 6px;
+  text-align: center;
+  color: #9ca3af;
+}
+
+.photo-placeholder-icon {
+  color: #cbd5e1;
+  margin-bottom: 2px;
+}
+
+.photo-placeholder-text {
+  font-size: 11px;
+  color: #6b7280;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.photo-placeholder-sub {
+  font-size: 9.5px;
+  color: #9ca3af;
+  line-height: 1.1;
+}
+
+.photo-error {
+  position: absolute;
+  top: calc(var(--rm-margin-y, 22mm) + 42mm + 10px);
+  right: var(--rm-margin-x, 20mm);
+  max-width: calc(210mm - 2 * var(--rm-margin-x, 20mm));
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+  font-size: 12px;
+  line-height: 1.35;
+  padding: 7px 10px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  z-index: 20;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(220, 38, 38, 0.12);
+}
+
+.photo-error > span {
+  flex: 1;
+}
+
+/* When resuming to inline mode, do not show the photo area at all (visibility already handled
+   via conditional render in JSX). This selector is a safety fallback only. */
+.resume-page.contact-inline .photo-frame,
+.resume-page.contact-inline .photo-error {
+  display: none !important;
+}
+
+@page {
+  size: A4;
+  margin: 0;
+}
+
+@media print {
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  html.resume-printing,
+  html.resume-printing body,
+  html.resume-printing #root {
+    width: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+  }
+
+  html.resume-printing body {
+    overflow: visible !important;
+  }
+
+  html.resume-printing #root > div,
+  html.resume-printing main,
+  html.resume-printing main > div,
+  html.resume-printing .print-area,
+  html.resume-printing .print-area > section {
+    display: block !important;
+    width: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+    position: static !important;
+    flex: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    box-shadow: none !important;
+    border: 0 !important;
+  }
+
+  html.resume-printing .screen-only,
+  html.resume-printing .settings-panel,
+  html.resume-printing .resume-preview-header,
+  html.resume-printing [aria-hidden="true"] {
+    display: none !important;
+  }
+
+  html.resume-printing .a4-wrapper {
+    display: block !important;
+    width: auto !important;
+    height: auto !important;
+    overflow: visible !important;
+    background: #ffffff !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    gap: 0 !important;
+    flex: none !important;
+    align-items: stretch !important;
+  }
+
+  html.resume-printing .resume-page {
+    width: 210mm !important;
+    height: 297mm !important;
+    min-height: 297mm !important;
+    max-height: 297mm !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    overflow: hidden !important;
+    position: relative !important;
+    page-break-after: always !important;
+    break-after: page !important;
+    animation: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+
+  html.resume-printing .resume-page:last-child {
+    page-break-after: auto !important;
+    break-after: auto !important;
+  }
+
+  html.resume-printing .resume-preview,
+  html.resume-printing .resume-preview.fade-transition {
+    width: 100% !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    display: block !important;
+    animation: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+
+  html.resume-printing [data-scope],
+  html.resume-printing [data-part] {
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+  }
+
+  html.resume-printing .resume-page,
+  html.resume-printing .resume-page * {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    color: #000000 !important;
+    -webkit-text-fill-color: #000000 !important;
+    text-shadow: none !important;
+  }
+
+  html.resume-printing .resume-page h2,
+  html.resume-printing .resume-page .resume-header {
+    border-bottom-color: var(--rm-accent, #3b82f6) !important;
+  }
+
+  html.resume-printing .resume-page hr {
+    border-top-color: var(--rm-accent, #3b82f6) !important;
+  }
+
+  html.resume-printing .resume-page ul li::marker,
+  html.resume-printing .resume-page ol li::marker {
+    color: var(--rm-accent, #3b82f6) !important;
+  }
+
+  html.resume-printing .resume-page .row .right {
+    color: var(--rm-accent, #3b82f6) !important;
+  }
+
+  html.resume-printing .photo-frame.has-photo {
+    display: block !important;
+    visibility: visible !important;
+    position: absolute !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    cursor: default !important;
+    z-index: auto !important;
+  }
+
+  html.resume-printing .photo-frame .photo-image {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+
+  html.resume-printing .photo-frame .photo-overlay,
+  html.resume-printing .photo-frame .photo-remove-btn,
+  html.resume-printing .photo-frame .photo-placeholder {
+    display: none !important;
+  }
+}

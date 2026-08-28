@@ -1,0 +1,247 @@
+/* Backbone CSS for Resume Template 1 — variable-driven */
+
+/* Basic */
+.resume-preview [data-scope="vue-smart-pages"][data-part="page"] {
+  background-color: white;
+  color: var(--rm-text-color, #374151);
+  text-align: justify;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+.resume-preview p,
+.resume-preview li,
+.resume-preview dl {
+  margin: 0;
+  line-height: var(--rm-line-height, 1.7);
+  font-size: var(--rm-font-size, 14px);
+  color: var(--rm-text-color, #374151);
+}
+
+.resume-preview p + p {
+  margin-top: calc(var(--rm-font-size, 14px) * var(--rm-para-spacing, 0.4));
+}
+
+/* Headings */
+.resume-preview h1,
+.resume-preview h2,
+.resume-preview h3 {
+  font-weight: 700;
+  color: var(--rm-heading-color, #1f2937);
+  font-family: var(--rm-font-zh, "PingFang SC"), "Georgia", "Noto Serif SC", "Songti SC", var(--rm-font-en, "Helvetica Neue"), serif;
+  letter-spacing: 0.01em;
+  margin: 0;
+}
+
+.resume-preview h1 {
+  font-size: calc(var(--rm-font-size, 14px) * 2.13);
+  color: var(--rm-heading-color, #111827);
+}
+
+.resume-preview h2,
+.resume-preview h3 {
+  margin-bottom: calc(var(--rm-font-size, 14px) * 0.36);
+  margin-top: calc(var(--rm-font-size, 14px) * var(--rm-section-spacing, 1.2));
+}
+
+.resume-preview h2 {
+  border-bottom-style: solid;
+  border-bottom-width: 1.5px;
+  border-bottom-color: var(--rm-accent, #3b82f6);
+  padding-bottom: 6px;
+  color: var(--rm-heading-color, #1e3a8a);
+  font-size: calc(var(--rm-font-size, 14px) * var(--rm-heading-scale, 1.25));
+  text-transform: none;
+}
+
+.resume-preview h3 {
+  font-size: calc(var(--rm-font-size, 14px) * 1.05);
+  color: var(--rm-heading-color, #1f2937);
+  border-bottom: none;
+}
+
+/* Links */
+.resume-preview a {
+  color: var(--rm-accent, #2563eb);
+  text-decoration: none;
+  border-bottom: 1px dotted color-mix(in srgb, var(--rm-accent, #2563eb) 55%, transparent);
+}
+
+.resume-preview a:hover {
+  color: color-mix(in srgb, var(--rm-accent, #2563eb) 80%, #000);
+  border-bottom-style: solid;
+}
+
+/* Lists */
+.resume-preview ul,
+.resume-preview ol {
+  padding-left: var(--rm-list-indent, 1.5em);
+  margin: calc(var(--rm-font-size, 14px) * 0.4) 0;
+}
+
+.resume-preview ul {
+  list-style-type: circle;
+  color: var(--rm-text-color, #374151);
+}
+
+.resume-preview ul li::marker {
+  color: var(--rm-accent, #3b82f6);
+}
+
+.resume-preview ol {
+  list-style-type: decimal;
+}
+
+.resume-preview ol li::marker {
+  color: var(--rm-accent, #2563eb);
+  font-weight: 600;
+}
+
+.resume-preview li {
+  margin: calc(var(--rm-font-size, 14px) * 0.13) 0;
+  line-height: var(--rm-line-height, 1.7);
+}
+
+/* Definition Lists */
+.resume-preview dl {
+  display: flex;
+  margin: calc(var(--rm-font-size, 14px) * 0.25) 0;
+}
+
+.resume-preview dl dt,
+.resume-preview dl dd:not(:last-child) {
+  flex: 1;
+}
+
+.resume-preview dl dt {
+  font-weight: 600;
+  color: var(--rm-heading-color, #111827);
+}
+
+/* Tex */
+.resume-preview :not(span.katex-display) > span.katex {
+  font-size: 1em !important;
+}
+
+/* SVG & Images */
+.resume-preview svg.iconify {
+  vertical-align: -0.2em;
+}
+
+.resume-preview img {
+  max-width: 100%;
+}
+
+/* Horizontal Rule */
+.resume-preview hr {
+  border: none;
+  border-top: 1px solid color-mix(in srgb, var(--rm-accent, #3b82f6) 30%, transparent);
+  margin: calc(var(--rm-font-size, 14px) * 1.1) 0;
+}
+
+/* Bold */
+.resume-preview strong,
+.resume-preview b {
+  color: var(--rm-heading-color, #111827);
+  font-weight: 700;
+}
+
+/* Italic */
+.resume-preview em,
+.resume-preview i {
+  color: color-mix(in srgb, var(--rm-text-color, #4b5563) 85%, #000);
+}
+
+/* Inline code */
+.resume-preview code {
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.92em;
+  background: color-mix(in srgb, var(--rm-accent, #3b82f6) 12%, white);
+  color: color-mix(in srgb, var(--rm-accent, #1d4ed8) 90%, #000);
+  padding: 1px 6px;
+  border-radius: 3px;
+}
+
+/* Blockquote */
+.resume-preview blockquote {
+  margin: calc(var(--rm-font-size, 14px) * 0.8) 0;
+  padding: 0.6em 1em;
+  border-left: 3px solid var(--rm-accent, #3b82f6);
+  background: color-mix(in srgb, var(--rm-accent, #3b82f6) 6%, white);
+  color: color-mix(in srgb, var(--rm-text-color, #4b5563) 90%, #000);
+  font-style: italic;
+}
+
+/* Header */
+.resume-preview .resume-header {
+  text-align: center;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1.5px solid var(--rm-accent, #3b82f6);
+}
+
+.resume-preview .resume-header h1 {
+  text-align: center;
+  line-height: 1;
+  margin-bottom: 10px;
+  font-size: calc(var(--rm-font-size, 14px) * 2.4);
+  letter-spacing: 0.03em;
+  color: var(--rm-heading-color, #0f172a);
+}
+
+.resume-preview .resume-header-item {
+  font-size: var(--rm-font-size, 14px);
+  color: color-mix(in srgb, var(--rm-text-color, #6b7280) 70%, #888);
+}
+
+.resume-preview .resume-header-item:not(.no-separator)::after {
+  content: " | ";
+  color: var(--rm-accent, #3b82f6);
+  margin: 0 2px;
+}
+
+/* Citations */
+.resume-preview [data-scope="cross-ref"][data-part="definitions"] {
+  padding-left: 1.2em;
+}
+
+.resume-preview [data-scope="cross-ref"][data-part="definition"] p {
+  margin-left: 0.5em;
+}
+
+.resume-preview [data-scope="cross-ref"][data-part="definition"]::marker {
+  content: attr(data-label);
+}
+
+.resume-preview [data-scope="cross-ref"][data-part="reference"] {
+  font-size: 100%;
+  top: 0;
+}
+
+/* Date / Right aligned info rows */
+.resume-preview .row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin: calc(var(--rm-font-size, 14px) * 0.4) 0 calc(var(--rm-font-size, 14px) * 0.07) 0;
+}
+
+.resume-preview .row .left {
+  font-weight: 600;
+  color: var(--rm-heading-color, #111827);
+}
+
+.resume-preview .row .right {
+  font-size: 0.9em;
+  color: var(--rm-accent, #2563eb);
+  font-style: italic;
+  white-space: nowrap;
+}
+
+/* Dark mode */
+.dark .resume-preview [data-scope="vue-smart-pages"][data-part="page"] {
+  background-color: hsl(213, 12%, 15%);
+  color: hsl(216, 12%, 84%);
+}
